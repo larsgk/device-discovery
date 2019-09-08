@@ -73,7 +73,6 @@ navigator.devices.registerDriver('driver-name', driver);
 ```
 
 ## Device provisioning
-
 For enterprise solutions, devices will be matched against pre-provisioned signatures.
 
 For consumer solutions, the simplest solution will be provisioning using e.g. NFC.
@@ -86,6 +85,11 @@ navigator.devices.addEventListener('connect', evt => handleConnectDevice);
 navigator.devices.addEventListener('disconnect', evt => handleDisconnectDevice);
 ```
 
+## Devices
+Initially, sensors will be supported, following the
+[GenericSensor](https://www.w3.org/TR/generic-sensor/) API.
+Actuators also need to be supported, but that will require work done on
+generic actuators, which should be covered in a separate proposal/spec.
 
 ## [API 1]
 
