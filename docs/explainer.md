@@ -42,9 +42,9 @@ TBD areas to explore: Enterprise Chrome or Extensions (pre-provision),
 (trusted) driver registration, NFC
 
 ### Vehicle monitoring
-When connecting a phone to a vehicle (most common: car) via BLE or USB, I'd like for
+When connecting a phone to a vehicle (most common: car) via BLE or USB,
 any web app utilizing sensor data (geolocation, ambient light, temperature, etc.)
-to be able to tap into the extra sensors available.
+should be able to tap into the extra sensors available.
 
 It should be possible to register and prioritize (e.g. 'new default')
 these sensors to be discoverable as first class Generic Sensors for the app.
@@ -134,7 +134,16 @@ If there is no suitable external documentation, you might like to provide supple
 
 ## Detailed design discussion
 
-### [Tricky design choice #1]
+### Device connection vs WebUSB, WebBluetooth and Serial
+
+Devices that are covered by device drivers and discovery, should not
+be listed/be accessible using the low level WebUSB, WebBluetooth or Serial APIs
+to prevent parallel access. This needs to be done to avoid exclusivity problems.
+However, it should be possible to access the corresponding lower level device
+instance (USB, BLE, Serial) inside the discoverable device object.
+
+
+......
 
 [Talk through the tradeoffs in coming to the specific design point you want to make.]
 
@@ -151,17 +160,27 @@ in which case you should link to any active discussion threads.]
 
 ## Considered alternatives
 
-[This should include as many alternatives as you can,
-from high level architectural decisions down to alternative naming choices.]
+The existing APIs supports the above mentioned scenarios except for
+discovery and pre-provisioning.
 
-### [Alternative 1]
+It will currently be possible to do polyfills to support the cases
+if accepting the need for user interaction per device.
 
-[Describe an alternative which was considered,
-and why you decided against it.]
+### WebUSB devices
 
-### [Alternative 2]
+WebUSB enabled devices would be possible to connect and register
+following the patterns described in the proposal, using polyfills
+and only requiring initial provisioning, which could be considered
+acceptable in many scenarios.  However, it would be desirable
+to avoid user interaction for acceptance for industry solutions.
 
-[etc.]
+### WebBluetooth devices
+
+Bluetooth Smart devices currently requires user interaction to
+discover and connect for every connection.  This will not be an acceptable
+solution for enterprise solutions.  However, it would be possible
+to make polyfills as a temporary solution, that will require
+user interaction.
 
 ## Stakeholder Feedback / Opposition
 
