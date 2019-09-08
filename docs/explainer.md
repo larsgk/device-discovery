@@ -8,10 +8,6 @@ NOTE: THIS IS WORK IN PROGRESS (draft)
 - [Author 2]
 - [etc.]
 
-## Table of Contents [if the explainer is longer than one printed page]
-
-[You can generate a Table of Contents for markdown documents using a tool like [doctoc](https://github.com/thlorenz/doctoc).]
-
 ## Introduction
 
 The Generic Sensor API spec (https://w3c.github.io/sensors/) and
@@ -29,7 +25,6 @@ enterprise solutions.
 ## Use Cases
 
 ### Engineer/field worker running diagnostics
-
 Inspection of factory floors, engine rooms, etc. will benefit from
 field workers to be able to quickly obtain readings from sensors in the
 vicinity. Connection can be wired or wireless depending on the setup.
@@ -60,7 +55,6 @@ will provide app developers a generalized and portable approach to interacting
 with home automation units (thermostats, lights, environmental readings, etc.).
 
 ## API: Driver Registration
-
 The drivers function as the HAL between wired/wireless devices and standardized
 generic device JS APIs. They provide unique discovery identifiers (supporting WebUSB,
 WebBluetooth and Serial cases), protocol handlers and exposure to the application.
@@ -91,6 +85,7 @@ Initially, sensors will be supported, following the
 Actuators also need to be supported, but that will require work done on
 generic actuators, which should be covered in a separate proposal/spec.
 
+...
 ## [API 1]
 
 [For each related element of the proposed solution - be it an additional JS method, a new object, a new element, a new concept etc., create a section which briefly describes it.]
@@ -135,31 +130,13 @@ If there is no suitable external documentation, you might like to provide supple
 ## Detailed design discussion
 
 ### Device connection vs WebUSB, WebBluetooth and Serial
-
 Devices that are covered by device drivers and discovery, should not
 be listed/be accessible using the low level WebUSB, WebBluetooth or Serial APIs
 to prevent parallel access. This needs to be done to avoid exclusivity problems.
 However, it should be possible to access the corresponding lower level device
 instance (USB, BLE, Serial) inside the discoverable device object.
 
-
-......
-
-[Talk through the tradeoffs in coming to the specific design point you want to make.]
-
-```js
-// Illustrated with example code.
-```
-
-[This may be an open question,
-in which case you should link to any active discussion threads.]
-
-### [Tricky design choice 2]
-
-[etc.]
-
 ## Considered alternatives
-
 The existing APIs supports the above mentioned scenarios except for
 discovery and pre-provisioning.
 
@@ -167,7 +144,6 @@ It will currently be possible to do polyfills to support the cases
 if accepting the need for user interaction per device.
 
 ### WebUSB devices
-
 WebUSB enabled devices would be possible to connect and register
 following the patterns described in the proposal, using polyfills
 and only requiring initial provisioning, which could be considered
@@ -175,7 +151,6 @@ acceptable in many scenarios.  However, it would be desirable
 to avoid user interaction for acceptance for industry solutions.
 
 ### WebBluetooth devices
-
 Bluetooth Smart devices currently requires user interaction to
 discover and connect for every connection.  This will not be an acceptable
 solution for enterprise solutions.  However, it would be possible
@@ -200,6 +175,6 @@ user interaction.
 
 Many thanks for valuable feedback and advice from:
 
-- [Person 1]
+- [Kenneth Christiansen](https://github.com/kenchris)
 - [Person 2]
 - [etc.]
