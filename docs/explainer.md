@@ -4,7 +4,7 @@ NOTE: THIS IS WORK IN PROGRESS (draft)
 
 ## Authors:
 
-- [Lars Knudsen](@larsgk)
+- [Lars Knudsen](https://github.com/larsgk)
 - [Author 2]
 - [etc.]
 
