@@ -26,7 +26,7 @@ device discovery, pre-provisioning and driver registration for this
 domain of features to be valuable - in particular - for
 enterprise solutions.
 
-## Motivating Use Cases
+## Use Cases
 
 ### Engineer/field worker running diagnostics
 
@@ -61,7 +61,31 @@ with home automation units (thermostats, lights, environmental readings, etc.).
 
 ## API: Driver Registration
 
+The drivers function as the HAL between wired/wireless devices and standardized
+generic device JS APIs. They provide unique discovery identifiers (supporting WebUSB,
+WebBluetooth and Serial cases), protocol handlers and exposure to the application.
+
+Registration:
+
+```js
+navigator.devices.registerDriver('driver-name', driver);
+
+```
+
+## Device provisioning
+
+For enterprise solutions, devices will be matched against pre-provisioned signatures.
+
+For consumer solutions, the simplest solution will be provisioning using e.g. NFC.
+
 ## API: Device Discovery
+Pre-provisioned devices with driver support, will be discoverable to the app with:
+
+```javascript
+navigator.devices.addEventListener('connect', evt => handleConnectDevice);
+navigator.devices.addEventListener('disconnect', evt => handleDisconnectDevice);
+```
+
 
 ## [API 1]
 
