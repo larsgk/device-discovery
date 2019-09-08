@@ -4,7 +4,7 @@ NOTE: THIS IS WORK IN PROGRESS (draft)
 
 ## Authors:
 
-- Lars Knudsen (@larsgk)
+- [Lars Knudsen](@larsgk)
 - [Author 2]
 - [etc.]
 
