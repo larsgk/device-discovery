@@ -13,13 +13,13 @@ NOTE: THIS IS WORK IN PROGRESS (draft)
 The Generic Sensor API spec (https://w3c.github.io/sensors/) and
 derivaties (e.g. https://www.w3.org/TR/orientation-sensor/) provide
 a great foundation for unified interaction with device sensors.
-In addition, Web USB, Web Bluetooth and Serial API enables communication
+In addition, Web USB, Web Bluetooth and Serial API enable communication
 with external devices attached to the host system, relying on user
 interaction and custom driver code embedded in the application.
 
 However, there is a need for a generic solution for actuator support,
 device discovery, pre-provisioning and driver registration for this
-domain of features to be valuable - in particular - for
+domain of features to be valuable—in particular—for
 enterprise solutions.
 
 ## Use Cases
@@ -28,7 +28,7 @@ enterprise solutions.
 Inspection of factory floors, engine rooms, etc. will benefit from
 field workers to be able to quickly obtain readings from sensors in the
 vicinity. Connection can be wired or wireless depending on the setup.
-Assuming the diagnostics SW is a PWA (being offline will be a common case),
+Assuming the diagnostics software is a PWA (being offline will be a common case),
 the engineer should be able to discover and interact with trusted
 devices without the need to go through the current flow of provisioning
 for every single sensor.
@@ -47,7 +47,7 @@ these sensors to be discoverable as first class Generic Sensors for the app.
 TBD areas to explore: NFC (tap to provision on/off)
 
 ### Home automation
-Given that BLE Mesh implementations for home automation is moving now it would
+Given that BLE Mesh implementations for home automation is moving, now it would
 only be natural if a web app connecting to a node in the house would be able to
 discover and interact with the sensors and actuators available.  Allowing
 dynamic registration/deregistration in the Generic Sensor (and Actuator) context
@@ -55,7 +55,7 @@ will provide app developers a generalized and portable approach to interacting
 with home automation units (thermostats, lights, environmental readings, etc.).
 
 ## API: Driver Registration
-The drivers function as the HAL between wired/wireless devices and standardized
+The drivers function as the Hardware Abstraction Layer (HAL) between wired/wireless devices and standardized
 generic device JS APIs. They provide unique discovery identifiers (supporting WebUSB,
 WebBluetooth and Serial cases), protocol handlers and exposure to the application.
 
@@ -72,16 +72,16 @@ For enterprise solutions, devices will be matched against pre-provisioned signat
 For consumer solutions, the simplest solution will be provisioning using e.g. NFC.
 
 ## API: Device Discovery
-Pre-provisioned devices with driver support, will be discoverable to the app with:
+Pre-provisioned devices with driver support will be discoverable to the app with:
 
-```javascript
+```js
 navigator.devices.addEventListener('connect', evt => handleConnectDevice);
 navigator.devices.addEventListener('disconnect', evt => handleDisconnectDevice);
 ```
 
 ## Devices
 Initially, sensors will be supported, following the
-[GenericSensor](https://www.w3.org/TR/generic-sensor/) API.
+[Generic Sensor](https://www.w3.org/TR/generic-sensor/) API.
 Actuators also need to be supported, but that will require work done on
 generic actuators, which should be covered in a separate proposal/spec.
 
@@ -113,7 +113,7 @@ If there is no suitable external documentation, you might like to provide supple
 
 ## Key scenarios
 
-[If there are a suite of interacting APIs, show how they work together to solve the key scenarios described.]
+[If there is a suite of interacting APIs, show how they work together to solve the key scenarios described.]
 
 ### Scenario 1
 
@@ -129,15 +129,15 @@ If there is no suitable external documentation, you might like to provide supple
 
 ## Detailed design discussion
 
-### Device connection vs WebUSB, WebBluetooth and Serial
-Devices that are covered by device drivers and discovery, should not
+### Device connection vs. WebUSB, WebBluetooth and Serial
+Devices that are covered by device drivers and discovery should not
 be listed/be accessible using the low level WebUSB, WebBluetooth or Serial APIs
 to prevent parallel access. This needs to be done to avoid exclusivity problems.
 However, it should be possible to access the corresponding lower level device
 instance (USB, BLE, Serial) inside the discoverable device object.
 
 ## Considered alternatives
-The existing APIs supports the above mentioned scenarios except for
+The existing APIs support the above mentioned scenarios except for
 discovery and pre-provisioning.
 
 It will currently be possible to do polyfills to support the cases
@@ -151,10 +151,10 @@ acceptable in many scenarios.  However, it would be desirable
 to avoid user interaction for acceptance for industry solutions.
 
 ### WebBluetooth devices
-Bluetooth Smart devices currently requires user interaction to
+Bluetooth Smart devices currently require user interaction to
 discover and connect for every connection.  This will not be an acceptable
 solution for enterprise solutions.  However, it would be possible
-to make polyfills as a temporary solution, that will require
+to make polyfills as a temporary solution that will require
 user interaction.
 
 ## Stakeholder Feedback / Opposition
