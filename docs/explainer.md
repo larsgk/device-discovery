@@ -54,15 +54,45 @@ dynamic registration/deregistration in the Generic Sensor (and Actuator) context
 will provide app developers a generalized and portable approach to interacting
 with home automation units (thermostats, lights, environmental readings, etc.).
 
+## API: Driver definition
+
+```js
+class MyDeviceDriver extends GenericDeviceDriver {
+    static get discovery() {
+        return [
+            // NOTE: The device could support multiple protocols
+            //       or virtual devices using the same protocol
+            {
+                type: 'usb',
+                identifier: {
+                    vendorId: 0x0000,
+                    productId: 0x0000
+                }
+            },
+            {
+                type: 'bluetooth',
+                identifier: {
+                    services: ['ef680100-9b35-4933-9b10-52ffa9740042']
+                }
+            }
+        ]
+    }
+
+    // TODO: Device factory
+    // TODO: hardware abstraction layer (e.g. device <-> GenericSensor)
+}
+```
+
 ## API: Driver Registration
-The drivers function as the Hardware Abstraction Layer (HAL) between wired/wireless devices and standardized
-generic device JS APIs. They provide unique discovery identifiers (supporting WebUSB,
-WebBluetooth and Serial cases), protocol handlers and exposure to the application.
+The drivers function as the Hardware Abstraction Layer (HAL) between wired/wireless
+devices and standardized generic device JS APIs. They provide unique discovery
+identifiers (supporting WebUSB, WebBluetooth and Serial cases), protocol handlers
+and exposure to the application.
 
 Registration:
 
 ```js
-navigator.devices.registerDriver('driver-name', driver);
+navigator.devices.registerDriver('driver-name', MyDeviceDriver);
 
 ```
 
@@ -115,7 +145,13 @@ If there is no suitable external documentation, you might like to provide supple
 
 [If there is a suite of interacting APIs, show how they work together to solve the key scenarios described.]
 
-### Scenario 1
+### Field sensor diagnostics
+
+Common for this type of scenario:
+ * The user has pre-installed a PWA for sensor inspection
+ * The need for offine support will be common
+ * Trusted sensor drivers are preloaded and ready
+ * The user moves around in the field => not all sensors will be available at all times
 
 [Description of the end-user scenario]
 
